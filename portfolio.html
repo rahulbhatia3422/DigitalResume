@@ -1,0 +1,1795 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rahul Bhatia | AI & DevOps Specialist</title>
+
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<!-- Font Awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<!-- React & ReactDOM -->
+<script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+<script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+<!-- Babel for JSX transformation -->
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+<style>
+* { 
+  margin: 0; 
+  padding: 0; 
+  box-sizing: border-box; 
+  font-family: 'Poppins', sans-serif; 
+}
+
+:root {
+  --primary: #7C3AED;    /* Vibrant purple */
+  --primary-dark: #5B21B6; /* Darker purple */
+  --secondary: #06D6A0;  /* Vibrant teal */
+  --accent: #FF6B6B;     /* Vibrant coral */
+  --accent-light: #FF9E6D; /* Light coral */
+  --purple: #9D4EDD;     /* Bright purple */
+  --pink: #F72585;       /* Hot pink */
+  --blue: #4361EE;       /* Bright blue */
+  --text: #1A1A2E;       /* Dark blue-gray */
+  --text-light: #6B7280;
+  --bg: #F8FAFC;         /* Light gray-blue */
+  --white: #FFFFFF;
+  --card-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.15);
+  --transition: all 0.3s ease;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body { 
+  background: var(--bg); 
+  color: var(--text);
+  overflow-x: hidden;
+  line-height: 1.6;
+}
+
+/* Header Styles */
+header { 
+  background: linear-gradient(135deg, var(--primary), var(--purple), var(--pink)); 
+  color: var(--white); 
+  text-align: center; 
+  padding: 4rem 1rem;
+  position: relative;
+  overflow: hidden;
+}
+
+header::before {
+  content: '';
+  position: absolute;
+  width: 150%;
+  height: 150%;
+  top: -50%;
+  left: -25%;
+  background: radial-gradient(circle, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0) 70%);
+  z-index: 0;
+}
+
+header h1 { 
+  font-size: 3rem; 
+  margin-bottom: 0.5rem; 
+  position: relative;
+  z-index: 1;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+}
+
+header p { 
+  font-size: 1.2rem; 
+  max-width: 600px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+  text-shadow: 0 1px 5px rgba(0,0,0,0.2);
+}
+
+/* Navigation */
+nav { 
+  display: flex; 
+  justify-content: center; 
+  background: linear-gradient(90deg, var(--primary-dark), var(--primary), var(--purple));
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  flex-wrap: wrap;
+}
+
+nav a { 
+  color: var(--white); 
+  padding: 1rem 1.5rem; 
+  text-decoration: none; 
+  transition: var(--transition);
+  position: relative;
+  font-weight: 500;
+}
+
+nav a:hover { 
+  background: rgba(255, 255, 255, 0.15);
+  transform: translateY(-2px);
+}
+
+nav a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 3px;
+  background: var(--accent);
+  transition: var(--transition);
+  transform: translateX(-50%);
+}
+
+nav a:hover::after {
+  width: 80%;
+}
+
+/* Section Styles */
+section { 
+  padding: 5rem 1rem; 
+  max-width: 1200px; 
+  margin: auto;
+}
+
+section h2 { 
+  text-align: center; 
+  margin-bottom: 3rem; 
+  font-size: 2.5rem; 
+  color: var(--primary-dark);
+  position: relative;
+}
+
+section h2::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 4px;
+  background: linear-gradient(90deg, var(--primary), var(--accent));
+  border-radius: 2px;
+}
+
+/* Enhanced Timeline Styles */
+.timeline-container {
+  position: relative;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.timeline-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 4px;
+  background: linear-gradient(to bottom, var(--primary), var(--accent), var(--secondary));
+  transform: translateX(-50%);
+  border-radius: 2px;
+}
+
+.timeline-item {
+  position: relative;
+  margin-bottom: 4rem;
+  width: 100%;
+}
+
+.timeline-item:nth-child(odd) .timeline-content {
+  margin-left: auto;
+  margin-right: 0;
+}
+
+.timeline-item:nth-child(even) .timeline-content {
+  margin-left: 0;
+  margin-right: auto;
+}
+
+.timeline-content {
+  position: relative;
+  width: 45%;
+  padding: 2rem;
+  background: var(--white);
+  border-radius: 16px;
+  box-shadow: var(--card-shadow);
+  transition: var(--transition);
+  cursor: pointer;
+  overflow: hidden;
+  border: 1px solid rgba(124, 58, 237, 0.1);
+}
+
+.timeline-content::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 5px;
+  background: linear-gradient(90deg, var(--primary), var(--accent), var(--secondary));
+}
+
+.timeline-content:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 30px rgba(0,0,0,0.15);
+}
+
+.timeline-marker {
+  position: absolute;
+  top: 2rem;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--white);
+  border: 4px solid var(--primary);
+  box-shadow: 0 0 0 3px var(--white), 0 0 0 6px var(--primary);
+  z-index: 10;
+  transition: var(--transition);
+}
+
+.timeline-item:hover .timeline-marker {
+  transform: scale(1.2);
+  box-shadow: 0 0 0 3px var(--white), 0 0 0 6px var(--accent);
+}
+
+.timeline-item:nth-child(odd) .timeline-marker {
+  right: -12px;
+}
+
+.timeline-item:nth-child(even) .timeline-marker {
+  left: -12px;
+}
+
+.timeline-date {
+  display: inline-block;
+  padding: 0.3rem 1rem;
+  background: linear-gradient(135deg, var(--primary), var(--purple));
+  color: white;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin-bottom: 1rem;
+  box-shadow: 0 4px 6px rgba(124, 58, 237, 0.3);
+}
+
+.timeline-content h3 {
+  font-size: 1.4rem;
+  margin-bottom: 0.5rem;
+  color: var(--primary-dark);
+  background: linear-gradient(90deg, var(--primary-dark), var(--purple));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.timeline-content h4 {
+  font-size: 1.1rem;
+  color: var(--text-light);
+  margin-bottom: 1rem;
+  font-weight: 500;
+}
+
+.timeline-content p {
+  margin-bottom: 1rem;
+}
+
+.timeline-details {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s ease;
+}
+
+.timeline-content.expanded .timeline-details {
+  max-height: 500px;
+}
+
+.toggle-details {
+  background: none;
+  border: none;
+  color: var(--primary);
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  transition: var(--transition);
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  background: rgba(124, 58, 237, 0.1);
+}
+
+.toggle-details:hover {
+  color: var(--primary-dark);
+  background: rgba(124, 58, 237, 0.2);
+}
+
+.toggle-details i {
+  transition: transform 0.3s ease;
+}
+
+.timeline-content.expanded .toggle-details i {
+  transform: rotate(180deg);
+}
+
+.achievements-list, .responsibilities-list {
+  list-style-type: none;
+  margin-top: 1rem;
+}
+
+.achievements-list li, .responsibilities-list li {
+  position: relative;
+  padding-left: 1.5rem;
+  margin-bottom: 0.7rem;
+}
+
+.achievements-list li::before, .responsibilities-list li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+  font-weight: bold;
+}
+
+.tech-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.tech-tag {
+  background: rgba(124, 58, 237, 0.1);
+  color: var(--primary);
+  padding: 0.3rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  transition: var(--transition);
+}
+
+.tech-tag:hover {
+  background: rgba(124, 58, 237, 0.2);
+  transform: translateY(-2px);
+}
+
+/* Publications Section */
+.publications-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 2rem;
+}
+
+.publication-card {
+  background: var(--white);
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: var(--card-shadow);
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(124, 58, 237, 0.1);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.publication-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 5px;
+  background: linear-gradient(90deg, var(--primary), var(--accent), var(--secondary));
+}
+
+.publication-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 30px rgba(0,0,0,0.15);
+}
+
+.publication-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+}
+
+.publication-type {
+  display: inline-block;
+  padding: 0.3rem 0.8rem;
+  background: linear-gradient(135deg, var(--secondary), var(--blue));
+  color: white;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  box-shadow: 0 4px 6px rgba(6, 214, 160, 0.3);
+}
+
+.publication-year {
+  color: var(--text-light);
+  font-weight: 500;
+}
+
+.publication-title {
+  font-size: 1.3rem;
+  margin-bottom: 1rem;
+  color: var(--primary-dark);
+  line-height: 1.4;
+}
+
+.publication-authors {
+  font-style: italic;
+  margin-bottom: 1rem;
+  color: var(--text-light);
+}
+
+.publication-venue {
+  color: var(--primary);
+  font-weight: 500;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.publication-venue i {
+  color: var(--accent);
+}
+
+.publication-description {
+  margin-bottom: 1.5rem;
+  flex-grow: 1;
+}
+
+.publication-links {
+  display: flex;
+  gap: 1rem;
+  margin-top: auto;
+}
+
+.publication-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background: rgba(124, 58, 237, 0.1);
+  color: var(--primary);
+  text-decoration: none;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: var(--transition);
+}
+
+.publication-link:hover {
+  background: rgba(124, 58, 237, 0.2);
+  transform: translateY(-2px);
+}
+
+.publication-link.pdf {
+  background: rgba(255, 107, 107, 0.1);
+  color: var(--accent);
+}
+
+.publication-link.pdf:hover {
+  background: rgba(255, 107, 107, 0.2);
+}
+
+/* Profile Section */
+.profile { 
+  display: flex; 
+  flex-wrap: wrap; 
+  align-items: center; 
+  justify-content: center; 
+  gap: 3rem;
+}
+
+.profile-img-container {
+  position: relative;
+  width: 250px;
+  height: 250px;
+}
+
+.profile-img-container::before {
+  content: '';
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  right: -10px;
+  bottom: -10px;
+  background: linear-gradient(135deg, var(--primary), var(--accent), var(--secondary));
+  border-radius: 50%;
+  z-index: 0;
+  opacity: 0.3;
+  animation: rotate 10s linear infinite;
+}
+
+@keyframes rotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.profile img { 
+  width: 100%;
+  height: 100%;
+  border-radius: 50%; 
+  object-fit: cover; 
+  box-shadow: var(--card-shadow);
+  position: relative;
+  z-index: 1;
+}
+
+.profile-content { 
+  max-width: 600px; 
+  text-align: left;
+}
+
+.profile-content p {
+  font-size: 1.1rem;
+  margin-bottom: 1.5rem;
+}
+
+/* Skills Section */
+.skills-grid { 
+  display: grid; 
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); 
+  gap: 1.5rem; 
+}
+
+.skill-card { 
+  background: var(--white); 
+  border-radius: 16px; 
+  padding: 1.5rem; 
+  box-shadow: var(--card-shadow); 
+  text-align: center;
+  transition: var(--transition);
+  border-top: 4px solid var(--primary);
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(124, 58, 237, 0.1);
+}
+
+.skill-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+  transition: var(--transition);
+}
+
+.skill-card:hover::before {
+  left: 100%;
+}
+
+.skill-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 30px rgba(0,0,0,0.15);
+}
+
+.skill-card i {
+  font-size: 2.5rem;
+  background: linear-gradient(135deg, var(--primary), var(--purple));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 1rem;
+}
+
+/* Languages Section */
+.languages-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+}
+
+.language-card {
+  background: var(--white);
+  border-radius: 16px;
+  padding: 1.5rem;
+  box-shadow: var(--card-shadow);
+  text-align: center;
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  border: 1px solid rgba(124, 58, 237, 0.1);
+}
+
+.language-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 5px;
+  background: linear-gradient(90deg, var(--primary), var(--accent), var(--secondary));
+}
+
+.language-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 30px rgba(0,0,0,0.15);
+}
+
+.language-flag {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.language-name {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: var(--primary-dark);
+}
+
+.language-level {
+  font-size: 0.9rem;
+  color: var(--text-light);
+  margin-bottom: 1rem;
+}
+
+.language-progress {
+  height: 8px;
+  background: #e5e7eb;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 1rem;
+}
+
+.language-progress-bar {
+  height: 100%;
+  border-radius: 4px;
+  transition: width 1.5s ease-in-out;
+}
+
+.english .language-progress-bar {
+  background: linear-gradient(90deg, var(--primary), var(--purple));
+  width: 95%;
+}
+
+.hindi .language-progress-bar {
+  background: linear-gradient(90deg, var(--accent), var(--accent-light));
+  width: 100%;
+}
+
+.gujarati .language-progress-bar {
+  background: linear-gradient(90deg, var(--pink), var(--purple));
+  width: 100%;
+}
+
+.german .language-progress-bar {
+  background: linear-gradient(90deg, var(--secondary), #34d399);
+  width: 30%;
+}
+
+.language-card:hover .language-progress-bar {
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0% { opacity: 1; }
+  50% { opacity: 0.7; }
+  100% { opacity: 1; }
+}
+
+/* Projects Section */
+.projects-grid, .certificates-grid { 
+  display: grid; 
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+  gap: 2rem; 
+}
+
+.project-card, .certificate-card { 
+  background: var(--white); 
+  border-radius: 16px; 
+  box-shadow: var(--card-shadow); 
+  overflow: hidden;
+  transition: var(--transition);
+  position: relative;
+  border: 1px solid rgba(124, 58, 237, 0.1);
+}
+
+.project-card:hover, .certificate-card:hover { 
+  transform: translateY(-10px); 
+  box-shadow: 0 20px 30px rgba(0, 0, 0, 0.15);
+}
+
+.project-img, .certificate-img { 
+  width: 100%; 
+  height: 200px;
+  object-fit: cover;
+  transition: var(--transition);
+}
+
+.project-card:hover .project-img {
+  transform: scale(1.05);
+}
+
+.project-content, .certificate-content {
+  padding: 1.5rem;
+}
+
+.project-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.tag {
+  background: linear-gradient(135deg, var(--primary), var(--purple));
+  color: var(--white);
+  padding: 0.3rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  box-shadow: 0 4px 6px rgba(124, 58, 237, 0.3);
+  transition: var(--transition);
+}
+
+.tag:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 8px rgba(124, 58, 237, 0.4);
+}
+
+/* Certificate Search */
+.search-container {
+  position: relative;
+  max-width: 500px;
+  margin: 0 auto 2rem;
+}
+
+.search-container i {
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-light);
+}
+
+#certSearch { 
+  width: 100%; 
+  padding: 0.9rem 1rem 0.9rem 2.5rem; 
+  border-radius: 50px; 
+  border: 2px solid #e5e7eb; 
+  background: var(--white);
+  font-size: 1rem;
+  transition: var(--transition);
+  box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+}
+
+#certSearch:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.1);
+}
+
+/* Contact Section */
+.contact-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.contact-card {
+  background: var(--white);
+  border-radius: 16px;
+  padding: 2rem;
+  text-align: center;
+  box-shadow: var(--card-shadow);
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(124, 58, 237, 0.1);
+}
+
+.contact-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 5px;
+  background: linear-gradient(90deg, var(--primary), var(--accent), var(--secondary));
+}
+
+.contact-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 25px rgba(0,0,0,0.1);
+}
+
+.contact-card i {
+  font-size: 2.5rem;
+  background: linear-gradient(135deg, var(--primary), var(--purple));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 1rem;
+}
+
+.contact-card a {
+  color: var(--primary);
+  text-decoration: none;
+  font-weight: 500;
+  transition: var(--transition);
+}
+
+.contact-card a:hover {
+  color: var(--primary-dark);
+}
+
+/* Buttons */
+.btn {
+  display: inline-block;
+  background: linear-gradient(135deg, var(--primary), var(--purple));
+  color: var(--white);
+  padding: 0.8rem 1.8rem;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: var(--transition);
+  text-decoration: none;
+  box-shadow: 0 4px 15px rgba(124, 58, 237, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+  transition: var(--transition);
+}
+
+.btn:hover::before {
+  left: 100%;
+}
+
+.btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(124, 58, 237, 0.4);
+}
+
+.btn-accent {
+  background: linear-gradient(135deg, var(--accent), var(--accent-light));
+  box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+}
+
+.btn-accent:hover {
+  box-shadow: 0 6px 20px rgba(255, 107, 107, 0.4);
+}
+
+/* Lightbox */
+.lightbox { 
+  display: none; 
+  position: fixed; 
+  top: 0; 
+  left: 0; 
+  width: 100%; 
+  height: 100%; 
+  background: rgba(0,0,0,0.9); 
+  justify-content: center; 
+  align-items: center; 
+  z-index: 2000;
+  padding: 2rem;
+}
+
+.lightbox.active { 
+  display: flex; 
+  animation: fadeIn 0.3s ease;
+}
+
+.lightbox-content {
+  position: relative;
+  max-width: 90%;
+  max-height: 90%;
+}
+
+.lightbox-content img { 
+  max-width: 100%;
+  max-height: 100%;
+  border-radius: 10px; 
+  box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+}
+
+.close-lightbox {
+  position: absolute;
+  top: -40px;
+  right: 0;
+  color: var(--white);
+  font-size: 2rem;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.close-lightbox:hover {
+  color: var(--accent);
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.fade-in { 
+  opacity: 0; 
+  transform: translateY(30px); 
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out; 
+}
+
+.fade-in.visible { 
+  opacity: 1; 
+  transform: translateY(0); 
+}
+
+/* Footer */
+footer { 
+  background: linear-gradient(135deg, var(--primary-dark), var(--primary), var(--purple)); 
+  color: var(--white); 
+  text-align: center; 
+  padding: 3rem 1rem;
+  margin-top: 4rem;
+}
+
+.social-links {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  margin: 1.5rem 0;
+}
+
+.social-links a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 45px;
+  height: 45px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  color: var(--white);
+  font-size: 1.2rem;
+  transition: var(--transition);
+}
+
+.social-links a:hover {
+  background: var(--accent);
+  transform: translateY(-3px);
+}
+
+/* Theme Toggle */
+.theme-toggle {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: linear-gradient(135deg, var(--primary), var(--purple));
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(124, 58, 237, 0.4);
+  z-index: 1000;
+  transition: var(--transition);
+}
+
+.theme-toggle:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 20px rgba(124, 58, 237, 0.5);
+}
+
+/* Dark Theme */
+.dark-theme {
+  --bg: #0F172A;
+  --text: #F1F5F9;
+  --text-light: #94A3B8;
+  --white: #1E293B;
+  --card-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  header h1 { 
+    font-size: 2.2rem; 
+  }
+  
+  nav {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  nav a {
+    width: 100%;
+    text-align: center;
+  }
+  
+  section {
+    padding: 3rem 1rem;
+  }
+  
+  .profile {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .profile-content {
+    text-align: center;
+  }
+  
+  .languages-grid {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  }
+  
+  .publications-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  /* Timeline responsive */
+  .timeline-container::before {
+    left: 20px;
+  }
+  
+  .timeline-content {
+    width: calc(100% - 60px);
+    margin-left: 60px !important;
+    margin-right: 0 !important;
+  }
+  
+  .timeline-item:nth-child(odd) .timeline-marker,
+  .timeline-item:nth-child(even) .timeline-marker {
+    left: 10px;
+    right: auto;
+  }
+}
+
+@media (max-width: 480px) {
+  header h1 { 
+    font-size: 1.8rem; 
+  }
+  
+  header p {
+    font-size: 1rem;
+  }
+  
+  section h2 {
+    font-size: 2rem;
+  }
+  
+  .projects-grid, .certificates-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .languages-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .publication-links {
+    flex-direction: column;
+  }
+}
+</style>
+</head>
+
+<body>
+<div id="root"></div>
+
+<script type="text/babel">
+// React Components
+
+const { useState, useEffect, useRef } = React;
+
+// Theme Context
+const ThemeContext = React.createContext();
+
+// Theme Provider Component
+const ThemeProvider = ({ children }) => {
+  const [isDark, setIsDark] = useState(false);
+  
+  useEffect(() => {
+    // Apply theme to body
+    if (isDark) {
+      document.body.classList.add('dark-theme');
+    } else {
+      document.body.classList.remove('dark-theme');
+    }
+  }, [isDark]);
+  
+  const toggleTheme = () => {
+    setIsDark(!isDark);
+  };
+  
+  return (
+    <ThemeContext.Provider value={{ isDark, toggleTheme }}>
+      {children}
+    </ThemeContext.Provider>
+  );
+};
+
+// Header Component
+const Header = () => {
+  return (
+    <header>
+      <h1>Rahul Bhatia</h1>
+      <p>AI & DevOps Enthusiast | Python & Java Developer | Data Science Learner</p>
+    </header>
+  );
+};
+
+// Navigation Component
+const Navigation = () => {
+  const [activeSection, setActiveSection] = useState('profile');
+  
+  const handleNavClick = (sectionId) => {
+    setActiveSection(sectionId);
+    const element = document.getElementById(sectionId);
+    if (element) {
+      window.scrollTo({
+        top: element.offsetTop - 80,
+        behavior: 'smooth'
+      });
+    }
+  };
+  
+  useEffect(() => {
+    const handleScroll = () => {
+      const sections = ['profile', 'education', 'experience', 'skills', 'projects', 'languages', 'certificates', 'publications', 'contact'];
+      const scrollPosition = window.scrollY + 100;
+      
+      for (const section of sections) {
+        const element = document.getElementById(section);
+        if (element && scrollPosition >= element.offsetTop && scrollPosition < element.offsetTop + element.offsetHeight) {
+          setActiveSection(section);
+          break;
+        }
+      }
+    };
+    
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+  
+  return (
+    <nav>
+      <a 
+        href="#profile" 
+        className={activeSection === 'profile' ? 'active' : ''}
+        onClick={(e) => { e.preventDefault(); handleNavClick('profile'); }}
+      >
+        <i className="fas fa-user"></i> Profile
+      </a>
+      <a 
+        href="#education" 
+        className={activeSection === 'education' ? 'active' : ''}
+        onClick={(e) => { e.preventDefault(); handleNavClick('education'); }}
+      >
+        <i className="fas fa-graduation-cap"></i> Education
+      </a>
+      <a 
+        href="#experience" 
+        className={activeSection === 'experience' ? 'active' : ''}
+        onClick={(e) => { e.preventDefault(); handleNavClick('experience'); }}
+      >
+        <i className="fas fa-briefcase"></i> Experience
+      </a>
+      <a 
+        href="#skills" 
+        className={activeSection === 'skills' ? 'active' : ''}
+        onClick={(e) => { e.preventDefault(); handleNavClick('skills'); }}
+      >
+        <i className="fas fa-code"></i> Skills
+      </a>
+      <a 
+        href="#projects" 
+        className={activeSection === 'projects' ? 'active' : ''}
+        onClick={(e) => { e.preventDefault(); handleNavClick('projects'); }}
+      >
+        <i className="fas fa-project-diagram"></i> Projects
+      </a>
+      <a 
+        href="#languages" 
+        className={activeSection === 'languages' ? 'active' : ''}
+        onClick={(e) => { e.preventDefault(); handleNavClick('languages'); }}
+      >
+        <i className="fas fa-language"></i> Languages
+      </a>
+      <a 
+        href="#certificates" 
+        className={activeSection === 'certificates' ? 'active' : ''}
+        onClick={(e) => { e.preventDefault(); handleNavClick('certificates'); }}
+      >
+        <i className="fas fa-certificate"></i> Certificates
+      </a>
+      <a 
+        href="#publications" 
+        className={activeSection === 'publications' ? 'active' : ''}
+        onClick={(e) => { e.preventDefault(); handleNavClick('publications'); }}
+      >
+        <i className="fas fa-book"></i> Publications
+      </a>
+      <a 
+        href="#contact" 
+        className={activeSection === 'contact' ? 'active' : ''}
+        onClick={(e) => { e.preventDefault(); handleNavClick('contact'); }}
+      >
+        <i className="fas fa-envelope"></i> Contact
+      </a>
+    </nav>
+  );
+};
+
+// Profile Component
+const Profile = () => {
+  return (
+    <section id="profile" className="fade-in">
+      <h2>Profile</h2>
+      <div className="profile">
+        <div className="profile-img-container">
+          <img src="assets/rahul-photo.jpg" alt="Rahul Bhatia" />
+        </div>
+        <div className="profile-content">
+          <p>Hello! I'm <strong>Rahul Bhatia</strong>, a passionate developer and lifelong learner with expertise in Java, Python, DevOps tools, and Data Science Learner. I love building intelligent and efficient systems, exploring AI, and creating impactful digital products.</p>
+          <p>With a strong foundation in both development and operations, I bridge the gap between code and infrastructure to deliver robust, scalable solutions.</p>
+          <a href="assets/cv/Rahul-Bhatia-Resume.pdf" className="btn"><i className="fas fa-download"></i> Download CV</a>
+          <a href="#contact" className="btn btn-accent"><i className="fas fa-paper-plane"></i> Get In Touch</a>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+// Enhanced Education Component with Interactive Timeline
+const Education = () => {
+  const [expandedItems, setExpandedItems] = useState([]);
+  
+  const educationData = [
+    {
+      id: 1,
+      degree: "Master of Computer Applications (MCA)",
+      institution: "JSPM RSCOE College, Pune",
+      date: "2023 - 2025",
+      duration: "2 years",
+      grade: "CGPA: 9.91/10 (Current)",
+      description: "Specialization in AI & Machine Learning with advanced coursework in distributed systems and cloud computing.",
+      achievements: [
+        "Received Academic Excellence Award for outstanding performance",
+        "Published research paper on 'Unifying DevOps and Kubernetes: Automation Techniques for Modern Software Delivery'",
+        "Learned Foreign Language: German (A1 Level)",
+      ],
+      coursework: ["DevOps", "Spring Boot", "Cloud Computing", "Data Analytics"],
+      technologies: ["Python", "Java", "AWS", "Web Dev", "MongoDB"]
+    },
+    {
+      id: 2,
+      degree: "Bachelor of Computer Applications (BCA)",
+      institution: "CB Patel Computer College, Surat, Gujarat",
+      date: "2020 - 2023",
+      duration: "3 years",
+      grade: "CGPA: 7.8/10",
+      description: "Focused on foundational computer science concepts with emphasis on software development and database management.",
+      achievements: [
+        "Graduated with First Class Honors",
+      ],
+      coursework: ["Data Structures", "Database Management", "Web Development", "Software Engineering", "Computer Networks"],
+      technologies: ["Java", "MySQL", "HTML/CSS", "JavaScript", "PHP", "Bootstrap"]
+    }
+  ];
+  
+  const toggleExpand = (id) => {
+    if (expandedItems.includes(id)) {
+      setExpandedItems(expandedItems.filter(itemId => itemId !== id));
+    } else {
+      setExpandedItems([...expandedItems, id]);
+    }
+  };
+  
+  return (
+    <section id="education" className="fade-in">
+      <h2>Education</h2>
+      <div className="timeline-container">
+        {educationData.map((edu, index) => (
+          <div key={edu.id} className="timeline-item">
+            <div className="timeline-marker"></div>
+            <div 
+              className={`timeline-content ${expandedItems.includes(edu.id) ? 'expanded' : ''}`}
+              onClick={() => toggleExpand(edu.id)}
+            >
+              <span className="timeline-date">{edu.date}</span>
+              <h3>{edu.degree}</h3>
+              <h4>{edu.institution}</h4>
+              <p><strong>Duration:</strong> {edu.duration} | <strong>Grade:</strong> {edu.grade}</p>
+              <p>{edu.description}</p>
+              
+              <div className="timeline-details">
+                <h5>Key Achievements:</h5>
+                <ul className="achievements-list">
+                  {edu.achievements.map((achievement, i) => (
+                    <li key={i}>{achievement}</li>
+                  ))}
+                </ul>
+                
+                <h5>Relevant Coursework:</h5>
+                <div className="tech-tags">
+                  {edu.coursework.map((course, i) => (
+                    <span key={i} className="tech-tag">{course}</span>
+                  ))}
+                </div>
+                
+                <h5>Technologies Used:</h5>
+                <div className="tech-tags">
+                  {edu.technologies.map((tech, i) => (
+                    <span key={i} className="tech-tag">{tech}</span>
+                  ))}
+                </div>
+              </div>
+              
+              <button className="toggle-details">
+                {expandedItems.includes(edu.id) ? 'Show Less' : 'Show More'} 
+                <i className="fas fa-chevron-down"></i>
+              </button>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+};
+
+// Enhanced Experience Component with Interactive Timeline
+const Experience = () => {
+  const [expandedItems, setExpandedItems] = useState([]);
+  
+  const experienceData = [
+    {
+      id: 1,
+      role: "DevOps Intern",
+      company: "Capgemini",
+      date: "Feb 2025 - August 2025",
+      duration: "6 months",
+      location: "Pune, India",
+      description: "Working with the Cloud Infrastructure team to implement and maintain CI/CD pipelines and cloud infrastructure.",
+      responsibilities: [
+        "Implemented and maintained CI/CD pipelines using Jenkins and GitHub",
+        "Containerized applications using Docker and managed container orchestration with Kubernetes",
+        "Automated infrastructure provisioning using Terraform and Ansible",
+      ],
+      technologies: ["Git", "Github","Jenkins", "Docker", "Kubernetes", "Terraform", "Ansible", "AWS", "Linux"]
+    } 
+  ];
+  
+  const toggleExpand = (id) => {
+    if (expandedItems.includes(id)) {
+      setExpandedItems(expandedItems.filter(itemId => itemId !== id));
+    } else {
+      setExpandedItems([...expandedItems, id]);
+    }
+  };
+  
+  return (
+    <section id="experience" className="fade-in">
+      <h2>Experience</h2>
+      <div className="timeline-container">
+        {experienceData.map((exp, index) => (
+          <div key={exp.id} className="timeline-item">
+            <div className="timeline-marker"></div>
+            <div 
+              className={`timeline-content ${expandedItems.includes(exp.id) ? 'expanded' : ''}`}
+              onClick={() => toggleExpand(exp.id)}
+            >
+              <span className="timeline-date">{exp.date}</span>
+              <h3>{exp.role}</h3>
+              <h4>{exp.company} | {exp.location}</h4>
+              <p><strong>Duration:</strong> {exp.duration}</p>
+              <p>{exp.description}</p>
+              
+              <div className="timeline-details">
+                <h5>Key Responsibilities & Achievements:</h5>
+                <ul className="responsibilities-list">
+                  {exp.responsibilities.map((responsibility, i) => (
+                    <li key={i}>{responsibility}</li>
+                  ))}
+                </ul>
+                
+                <h5>Technologies Used:</h5>
+                <div className="tech-tags">
+                  {exp.technologies.map((tech, i) => (
+                    <span key={i} className="tech-tag">{tech}</span>
+                  ))}
+                </div>
+              </div>
+              
+              <button className="toggle-details">
+                {expandedItems.includes(exp.id) ? 'Show Less' : 'Show More'} 
+                <i className="fas fa-chevron-down"></i>
+              </button>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+};
+
+// Skills Component
+const Skills = () => {
+  const skills = [
+    { icon: 'fab fa-java', name: 'Core Java', description: 'Core Java, Java 8 , JDBC' },
+    { icon: 'fab fa-python', name: 'Python', description: 'Python, Numpy, Pandas, Streamlit' },
+    { icon: 'fas fa-cloud', name: 'AWS & Cloud', description: 'EC2, S3, Lambda, RDS, and more' },
+    { icon: 'fas fa-code-branch', name: 'DevOps Tools', description: 'Git, Github, Jenkins, Docker, Terraform, Ansible' },
+    { icon: 'fas fa-database', name: 'Databases', description: 'MySQL, MongoDB' },
+    { icon: 'fab fa-js-square', name: 'Web Technologies', description: 'HTML, CSS, JavaScript, React' }
+  ];
+  
+  return (
+    <section id="skills" className="fade-in">
+      <h2>Skillset</h2>
+      <div className="skills-grid">
+        {skills.map((skill, index) => (
+          <div key={index} className="skill-card">
+            <i className={skill.icon}></i>
+            <h3>{skill.name}</h3>
+            <p>{skill.description}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+};
+
+// Projects Component
+const Projects = () => {
+  const projects = [
+    { 
+      img: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80", 
+      title: "Trendify", 
+      description: "An ecommerce platform built using Django, SQLite, and Bootstrap featuring a responsive UI and payment gateway.",
+      tags: ["Python", "Django", "Bootstrap"]
+    },
+    { 
+      img: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80", 
+      title: "Student Management System", 
+      description: "Developed using Spring Boot, Thymeleaf, and MySQL with CRUD operations for students and teachers.",
+      tags: ["Java", "Spring Boot", "MySQL"]
+    },
+    { 
+      img: "https://images.unsplash.com/photo-1581092580497-e0d23cbdf1dc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80", 
+      
+    title: "Automated Node.js App Deployment on AWS using DevOps Tools",
+    description: "A complete DevOps pipeline project demonstrating the automated deployment of a Node.js application on AWS EC2 using CI/CD tools like Jenkins, Docker, Terraform, and Ansible, ensuring scalability, version control, and continuous delivery.",
+    tags: ["Node.js", "AWS", "Git", "Github", "Jenkins", "Docker", "Terraform", "Ansible"]
+    }
+
+    
+  ];
+  
+  return (
+    <section id="projects" className="fade-in">
+      <h2>Projects</h2>
+      <div className="projects-grid">
+        {projects.map((project, index) => (
+          <div key={index} className="project-card">
+            <img src={project.img} alt={project.title} className="project-img" />
+            <div className="project-content">
+              <h3>{project.title}</h3>
+              <p>{project.description}</p>
+              <div className="project-tags">
+                {project.tags.map((tag, tagIndex) => (
+                  <span key={tagIndex} className="tag">{tag}</span>
+                ))}
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+};
+
+// Languages Component
+const Languages = () => {
+  const languages = [
+    { flag: "US", name: "English", level: "Fluent", proficiency: 95, description: "Professional proficiency" },
+    { flag: "IN", name: "Hindi", level: "Native", proficiency: 100, description: "Native speaker" },
+    { flag: "GJ", name: "Gujarati", level: "Native", proficiency: 100, description: "Native speaker" },
+    { flag: "DE", name: "German", level: "Basic", proficiency: 20, description: "Beginner level (A1)" }
+  ];
+  
+  const [activeLanguage, setActiveLanguage] = useState(null);
+  
+  return (
+    <section id="languages" className="fade-in">
+      <h2>Languages Known</h2>
+      <div className="languages-grid">
+        {languages.map((language, index) => (
+          <div 
+            key={index} 
+            className={`language-card ${language.name.toLowerCase()} ${activeLanguage === index ? 'active' : ''}`}
+            onClick={() => setActiveLanguage(activeLanguage === index ? null : index)}
+          >
+            <div className="language-flag">{language.flag}</div>
+            <div className="language-name">{language.name}</div>
+            <div className="language-level">{language.level}</div>
+            <div className="language-progress">
+              <div 
+                className="language-progress-bar" 
+                style={{ width: `${language.proficiency}%` }}
+              ></div>
+            </div>
+            <p>{language.description}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+};
+
+// Certificates Component
+const Certificates = () => {
+  const certificates = [
+    { 
+      img: "https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80", 
+      title: "DevOps Engineer Intern", 
+      issuer: "Capgemini Internship",
+      tags: "devops docker aws"
+    },
+    { 
+      img: "https://images.unsplash.com/photo-1581092580497-e0d23cbdf1dc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80", 
+      title: "Python for Data Science", 
+      issuer: "IIT Madras Certification",
+      tags: "python data science ai"
+    },
+    { 
+      img: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80", 
+      title: "Master Python Programming", 
+      issuer: "Udemy Certification",
+      tags: "python oops databases"
+    }
+  ];
+  
+  const [searchTerm, setSearchTerm] = useState('');
+  const [lightboxOpen, setLightboxOpen] = useState(false);
+  const [currentImage, setCurrentImage] = useState('');
+  
+  const filteredCertificates = certificates.filter(cert => 
+    cert.tags.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+  
+  const openLightbox = (imgSrc) => {
+    setCurrentImage(imgSrc);
+    setLightboxOpen(true);
+  };
+  
+  const closeLightbox = () => {
+    setLightboxOpen(false);
+  };
+  
+  return (
+    <section id="certificates" className="fade-in">
+      <h2>Certificates</h2>
+      <div className="search-container">
+        <i className="fas fa-search"></i>
+        <input 
+          type="text" 
+          id="certSearch" 
+          placeholder="Search certificate by keyword..." 
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
+      </div>
+      <div className="certificates-grid" id="certGrid">
+        {filteredCertificates.map((cert, index) => (
+          <div key={index} className="certificate-card" data-tags={cert.tags}>
+            <img 
+              src={cert.img} 
+              alt={cert.title} 
+              className="certificate-img" 
+              onClick={() => openLightbox(cert.img)}
+            />
+            <div className="certificate-content">
+              <h3>{cert.title}</h3>
+              <p>{cert.issuer}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+      
+      {/* Lightbox */}
+      <div className={`lightbox ${lightboxOpen ? 'active' : ''}`} onClick={closeLightbox}>
+        <div className="lightbox-content" onClick={(e) => e.stopPropagation()}>
+          <span className="close-lightbox" onClick={closeLightbox}>
+            <i className="fas fa-times"></i>
+          </span>
+          <img src={currentImage} alt="enlarged certificate" />
+        </div>
+      </div>
+    </section>
+  );
+};
+
+// Publications Component
+const Publications = () => {
+  const publications = [
+    {
+  id: 1,
+  title: "Unifying DevOps and Kubernetes: Automation Techniques for Modern Software Delivery",
+  authors: "Vrushabh Bawankar, Rahul Bhatia, Lalit Shinkar, Bablu Kumar, Pushpak Chaudhari",
+  venue: "International Journal of Research and Analytical Reviews (IJRAR)",
+  year: "2025",
+  type: "Journal Article",
+  description: "This research paper presents a comprehensive analysis of how Kubernetes revolutionizes modern DevOps pipelines by enabling declarative infrastructure, GitOps methodologies, CI/CD automation, monitoring and observability, and enhanced security practices. Key Highlights include: Declarative Infrastructure with Helm & Kustomize, GitOps Methodologies using ArgoCD and FluxCD, CI/CD automation via Jenkins, GitLab CI, Tekton, Monitoring & observability with Prometheus, Grafana, Loki, Best practices in RBAC, Network Policies, and secure rollbacks, Real-world use cases from enterprises like Netflix, Spotify, and Airbnb, and Future scope with AI/ML-driven autoscaling, Serverless Kubernetes, and Edge Deployments. Our contribution defines scalable, resilient, and secure Kubernetes-centric DevOps architectures, addressing challenges like steep learning curves and complex debugging while proposing actionable strategies for next-gen automation.",
+  links: [
+    { type: "Full Paper", url: "https://lnkd.in/dsHducKn", icon: "fas fa-external-link-alt" },
+    { type: "PDF", url: "assets/publications/Research-Paper.pdf", icon: "fas fa-file-pdf" },
+    { type: "Certificate", url: "assets/publications/certificate.jpg", icon: "fas fa-certificate" }
+  ]
+}
+
+    
+  ];
+  
+  return (
+    <section id="publications" className="fade-in">
+      <h2>Publications</h2>
+      <div className="publications-grid">
+        {publications.map((pub) => (
+          <div key={pub.id} className="publication-card">
+            <div className="publication-header">
+              <span className="publication-type">{pub.type}</span>
+              <span className="publication-year">{pub.year}</span>
+            </div>
+            <h3 className="publication-title">{pub.title}</h3>
+            <p className="publication-authors">{pub.authors}</p>
+            <div className="publication-venue">
+              <i className="fas fa-book-open"></i>
+              {pub.venue}
+            </div>
+            <p className="publication-description">{pub.description}</p>
+            <div className="publication-links">
+              {pub.links.map((link, index) => (
+                <a 
+                  key={index} 
+                  href={link.url} 
+                  className={`publication-link ${link.type.toLowerCase()}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <i className={link.icon}></i>
+                  {link.type}
+                </a>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+};
+
+// Contact Component
+const Contact = () => {
+  return (
+    <section id="contact" className="fade-in">
+      <h2>Contact Information</h2>
+      <div className="contact-grid">
+        <div className="contact-card">
+          <i className="fas fa-envelope"></i>
+          <h3>Email</h3>
+          <p><a href="mailto:rahulbhatia37293@gmail.com">rahulbhatia37293@gmail.com</a></p>
+        </div>
+        <div className="contact-card">
+          <i className="fab fa-linkedin"></i>
+          <h3>LinkedIn</h3>
+          <p><a href="https://www.linkedin.com/in/rahul-bhatia-6ba321207/" target="_blank">linkedin.com/in/rahul-bhatia-6ba321207/</a></p>
+        </div>
+        <div className="contact-card">
+          <i className="fab fa-github"></i>
+          <h3>GitHub</h3>
+          <p><a href="https://github.com/rahulbhatia3422" target="_blank">github.com/rahulbhatia3422</a></p>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+// Footer Component
+const Footer = () => {
+  return (
+    <footer>
+      <p>© 2025 Rahul Bhatia | All Rights Reserved</p>
+      <div className="social-links">
+        <a href="https://www.linkedin.com/in/rahul-bhatia-6ba321207/" target="_blank"><i className="fab fa-linkedin-in"></i></a>
+        <a href="https://github.com/rahulbhatia3422" target="_blank"><i className="fab fa-github"></i></a>
+        <a href="https://wa.me/919376816501?text=Hello%20Rahul,%20I%20found%20your%20portfolio!" target="_blank">
+  <i className="fab fa-whatsapp"></i>
+</a>
+
+        <a href="mailto:rahulbhatia37293@gmail.com"><i className="fas fa-envelope"></i></a>
+      </div>
+    </footer>
+  );
+};
+
+// Theme Toggle Component
+const ThemeToggle = () => {
+  const { isDark, toggleTheme } = React.useContext(ThemeContext);
+  
+  return (
+    <button className="theme-toggle" onClick={toggleTheme}>
+      <i className={isDark ? "fas fa-sun" : "fas fa-moon"}></i>
+    </button>
+  );
+};
+
+// Scroll Animation Hook
+const useScrollAnimation = () => {
+  useEffect(() => {
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.fade-in').forEach(sec => {
+      observer.observe(sec);
+    });
+
+    return () => {
+      document.querySelectorAll('.fade-in').forEach(sec => {
+        observer.unobserve(sec);
+      });
+    };
+  }, []);
+};
+
+// Main App Component
+const App = () => {
+  useScrollAnimation();
+  
+  return (
+    <ThemeProvider>
+      <div className="App">
+        <Header />
+        <Navigation />
+        <Profile />
+        <Education />
+        <Experience />
+        <Skills />
+        <Projects />
+        <Languages />
+        <Certificates />
+        <Publications />
+        <Contact />
+        <Footer />
+        <ThemeToggle />
+      </div>
+    </ThemeProvider>
+  );
+};
+
+// Render the App
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(<App />);
+</script>
+</body>
+</html>
